@@ -1,0 +1,7 @@
+Contains global/shared logic used across the whole app.
+
+Includes:
+    Constants (colors, API URLs)
+    Utilities (helper functions)
+    Theme (app design styles)
+    Services (shared backend/API logic)
