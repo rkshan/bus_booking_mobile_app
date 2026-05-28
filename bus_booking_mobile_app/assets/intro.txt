@@ -1,0 +1,7 @@
+Stores static files used in the app.
+
+Includes:
+    Images
+    Icons
+    Fonts
+    JSON files

@@ -1,0 +1,13 @@
+Contains all app modules separated by functionality.
+Each feature (like login, home, tracking) is independent.
+
+Includes:
+    UI screens
+    Feature-specific logic
+    Data handling for that feature
+
+Example features:
+    Auth (login/register)
+    Home
+    Profile
+    Tracking system

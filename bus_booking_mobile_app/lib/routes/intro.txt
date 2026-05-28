@@ -1,0 +1,6 @@
+Handles navigation between screens.
+
+Includes:
+    Route definitions
+    Navigation logic
+    App screen paths (login → home → profile)

@@ -1,0 +1,6 @@
+Contains reusable components used in multiple places.
+
+Includes:
+    Common widgets (buttons, loaders)
+    Shared models (data structures)
+    Reusable UI components
