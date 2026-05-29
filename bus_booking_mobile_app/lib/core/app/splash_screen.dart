@@ -24,11 +24,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> appStartUp() async {
     final seenIntro = await repository.hasSeenIntro();
+    final session = await repository.getSession();
 
-    if (seenIntro) {
-      Navigator.pushReplacementNamed(context, '/login');
-    } else {
+    if (!seenIntro) {
       Navigator.pushReplacementNamed(context, '/intro');
+    } else if (session != null) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      Navigator.pushReplacementNamed(context, '/login');
     }
   }
 

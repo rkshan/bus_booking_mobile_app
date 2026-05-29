@@ -5,12 +5,20 @@ import 'routes/app_routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import "../../../core/localization/l10n/app_localizations.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'features/login/auth_data.dart';
-import 'features/login/auth_repository.dart';
-import 'features/login/auth_provider.dart';
+import 'core/auth/auth_data.dart';
+import 'core/auth/auth_repository.dart';
+import 'core/auth/auth_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+  );
 
   runApp(
     MultiProvider(
