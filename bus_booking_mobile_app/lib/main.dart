@@ -7,7 +7,7 @@ import "../../../core/localization/l10n/app_localizations.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'core/auth/auth_data.dart';
 import 'core/auth/auth_repository.dart';
-import 'features/login/auth_provider.dart';
+import 'core/auth/auth_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
