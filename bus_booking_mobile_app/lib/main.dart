@@ -9,12 +9,15 @@ import 'core/auth/auth_data.dart';
 import 'core/auth/auth_repository.dart';
 import 'core/auth/auth_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
 
   await Supabase.initialize(
-    url: "https://qiuuchynzecmblfgzdvo.supabase.co",
-    anonKey: "sb_secret_Dh9pluv0GMcYsO_t33k4sA_EDy07B5x",
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
 
   runApp(
