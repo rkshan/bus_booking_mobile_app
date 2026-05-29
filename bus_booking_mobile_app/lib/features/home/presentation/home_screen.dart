@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../presentation/home_widget/common_button_widget.dart';
+import '../../../core/auth/auth_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,7 +14,7 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
       ),
 
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -41,6 +44,23 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
+
+            CommonButtonWidget(
+            text: "Logout",
+            onPressed: () async {
+              await context.read<AuthProvider>().logoutProvider();
+
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/login',
+                (route) => false,
+              );
+            },
+            textStyle: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold
+            ),
+          ),
           ],
         ),
       ),
