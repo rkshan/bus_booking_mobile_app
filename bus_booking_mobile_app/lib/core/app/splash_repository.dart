@@ -7,4 +7,8 @@ class SplashRepository {
   Future<bool> hasSeenIntro() async {
     return await splashData.hasSeenIntro();
   }
+
+  Future<void> setSeenIntro(bool value) async {
+    await splashData.setSeenIntro(value);
+  }
 }
