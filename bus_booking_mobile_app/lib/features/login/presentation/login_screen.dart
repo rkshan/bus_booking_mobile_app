@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import "../../../core/localization/l10n/app_localizations.dart";
 import 'login_widget/common_text_input_widget.dart';
 import 'login_widget/common_button_widget.dart';
-import '../auth_provider.dart';
+import '../../../core/auth/auth_provider.dart';
 import '../../../core/app/splash_repository.dart';
 import '../../../core/app/splash_data.dart';
 
