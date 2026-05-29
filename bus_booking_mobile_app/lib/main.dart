@@ -5,12 +5,17 @@ import 'routes/app_routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import "../../../core/localization/l10n/app_localizations.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'features/login/auth_data.dart';
-import 'features/login/auth_repository.dart';
+import 'core/auth/auth_data.dart';
+import 'core/auth/auth_repository.dart';
 import 'features/login/auth_provider.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: "https://qiuuchynzecmblfgzdvo.supabase.co",
+    anonKey: "sb_secret_Dh9pluv0GMcYsO_t33k4sA_EDy07B5x",
+  );
 
   runApp(
     MultiProvider(
