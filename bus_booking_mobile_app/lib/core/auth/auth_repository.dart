@@ -23,4 +23,8 @@ class AuthRepository {
       accessToken: session.accessToken,
     );
   }
+
+  Future<void> logoutRepo() async {
+    await Supabase.instance.client.auth.signOut();
+  }
 }
