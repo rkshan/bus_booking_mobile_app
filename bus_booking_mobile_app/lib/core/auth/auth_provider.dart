@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../core/auth/auth_repository.dart';
+import 'auth_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../core/auth/auth_model.dart';
+import 'auth_model.dart';
 
 class AuthProvider extends ChangeNotifier {
 
@@ -39,5 +39,10 @@ class AuthProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
+
+   Future<void> logoutProvider() async {
+    await authRepository.logoutRepo();
+    notifyListeners();
   }
 }
