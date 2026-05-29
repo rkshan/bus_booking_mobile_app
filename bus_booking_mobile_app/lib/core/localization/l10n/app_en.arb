@@ -1,0 +1,42 @@
+{
+  "login": "Login",
+  "intro": "Introduction",
+  "langEnglish": "English",
+  "langSinhala": "සිංහල",
+  "langTamil": "தமிழ்",
+
+  "page1_welcome": "Welcome to QuickBus",
+  "page1_title": "Travel Made Simple",
+  "page1_subtitle": "Book your bus tickets online easily, securely, and comfortably.",
+  "page1_highlight1": "Easy Online Booking",
+  "page1_highlight2": "Travel Across Sri Lanka",
+  "page1_highlight3": "Safe & Secure Payments",
+
+  "page2_welcome": "Why Choose QuickBus?",
+  "page2_title": "Everything You Need",
+  "page2_feature1": "Easy ticket booking",
+  "page2_feature2": "Choose your favorite seat",
+  "page2_feature3": "Secure online payments",
+  "page2_feature4": "Instant booking confirmation",
+
+  "page3_welcome": "Get Started Today",
+  "page3_title": "Book in 3 Simple Steps",
+  "page3_step1": "Search your route",
+  "page3_step2": "Select your seat",
+  "page3_step3": "Pay and travel",
+  "page3_button": "Get Started",
+
+  "login_screen_welcome": "Welcome Back",
+  "login_screen_title": "Login to Your Account",
+  "login_screen_subtitle": "Sign in to continue your journey with QuickBus.",
+  "login_screen_email_label": "Email Address",
+  "login_screen_email_hint": "Enter your email",
+  "login_screen_password_label": "Password",
+  "login_screen_password_hint": "Enter your password",
+  "login_screen_forgot_password": "Forgot Password?",
+  "login_screen_button": "Login",
+  "login_screen_no_account": "Don't have an account?",
+  "login_screen_register_now": "Register Now",
+  "login_screen_or_continue": "Or continue with",
+  "login_screen_google_login": "Google"
+}
