@@ -24,16 +24,11 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) =>
-              LanguageController()..loadSavedLanguage(),
+          create: (_) => LanguageController()..loadSavedLanguage(),
         ),
 
         ChangeNotifierProvider(
-          create: (_) => AuthProvider(
-            AuthRepository(
-              AuthData(),
-            ),
-          ),
+          create: (_) => AuthProvider(AuthRepository(AuthData())),
         ),
       ],
       child: const MyApp(),
@@ -51,15 +46,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           locale: lang.currentLocale,
 
-          theme: ThemeData(
-            textTheme: GoogleFonts.notoSansTextTheme(),
-          ),
+          theme: ThemeData(textTheme: GoogleFonts.notoSansTextTheme()),
 
-          supportedLocales: const [
-            Locale('en'),
-            Locale('si'),
-            Locale('ta'),
-          ],
+          supportedLocales: const [Locale('en'), Locale('si'), Locale('ta')],
 
           localizationsDelegates: const [
             AppLocalizations.delegate,
