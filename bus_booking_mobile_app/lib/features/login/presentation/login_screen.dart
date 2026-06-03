@@ -13,10 +13,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = context
-        .watch<LanguageController>()
-        .currentLocale
-        .languageCode;
+    final langCode = Localizations.localeOf(context).languageCode;
     final fontSizeGreeting = langCode == 'si'
         ? 18.0
         : langCode == 'ta'
@@ -100,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                     auth.user!.accessToken.isNotEmpty &&
                     auth.user!.userId.isNotEmpty) {
                   Future.microtask(() {
-                    Navigator.pushReplacementNamed(context, '/home');
+                    Navigator.pushReplacementNamed(context, '/main');
                   });
                 }
 

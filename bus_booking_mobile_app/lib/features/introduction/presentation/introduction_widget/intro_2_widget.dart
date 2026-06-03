@@ -9,10 +9,7 @@ class Intro2Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = context
-        .watch<LanguageController>()
-        .currentLocale
-        .languageCode;
+    final langCode = Localizations.localeOf(context).languageCode;
     final fontSizeGreeting = langCode == 'si' ? 22.0 : langCode == 'ta' ? 22.0 : 24.0;
     final fontSizeContent = langCode == 'si' || langCode == 'ta' ? 15.0 : 16.0;
     return Center(

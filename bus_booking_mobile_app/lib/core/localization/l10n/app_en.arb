@@ -38,5 +38,9 @@
   "login_screen_no_account": "Don't have an account?",
   "login_screen_register_now": "Register Now",
   "login_screen_or_continue": "Or continue with",
-  "login_screen_google_login": "Google"
+  "login_screen_google_login": "Google",
+
+  "main_screen_menu_home": "Explore",
+  "main_screen_menu_my_tickets": "My Tickets",
+  "main_screen_menu_profile": "Profile"
 }

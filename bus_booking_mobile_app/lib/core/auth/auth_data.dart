@@ -10,4 +10,12 @@ class AuthData {
     );
     return response;
   }
+
+  Future<void> logoutApiCall() async {
+    await supabase.auth.signOut();
+  }
+
+  Session? getCurrentSessionApiCall() {
+    return supabase.auth.currentSession;
+  }
 }

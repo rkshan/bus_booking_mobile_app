@@ -315,6 +315,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Google'**
   String get login_screen_google_login;
+
+  /// No description provided for @main_screen_menu_home.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore'**
+  String get main_screen_menu_home;
+
+  /// No description provided for @main_screen_menu_my_tickets.
+  ///
+  /// In en, this message translates to:
+  /// **'My Tickets'**
+  String get main_screen_menu_my_tickets;
+
+  /// No description provided for @main_screen_menu_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get main_screen_menu_profile;
 }
 
 class _AppLocalizationsDelegate
