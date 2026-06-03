@@ -117,4 +117,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get login_screen_google_login => 'Google';
+
+  @override
+  String get main_screen_menu_home => 'Explore';
+
+  @override
+  String get main_screen_menu_my_tickets => 'My Tickets';
+
+  @override
+  String get main_screen_menu_profile => 'Profile';
 }

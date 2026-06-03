@@ -118,4 +118,13 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get login_screen_google_login => 'Google மூலம் தொடருங்கள்';
+
+  @override
+  String get main_screen_menu_home => 'தேடு';
+
+  @override
+  String get main_screen_menu_my_tickets => 'டிக்கெட்டுகள்';
+
+  @override
+  String get main_screen_menu_profile => 'கணக்கு';
 }
