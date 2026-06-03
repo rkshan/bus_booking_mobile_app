@@ -11,10 +11,7 @@ class Intro3Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = context
-        .watch<LanguageController>()
-        .currentLocale
-        .languageCode;
+    final langCode = Localizations.localeOf(context).languageCode;
     final fontSizeGreeting = langCode == 'si'
         ? 22.0
         : langCode == 'ta'

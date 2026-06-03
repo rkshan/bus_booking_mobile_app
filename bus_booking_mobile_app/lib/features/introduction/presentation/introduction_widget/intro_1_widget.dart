@@ -9,10 +9,7 @@ class LanguageSelectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = context
-        .watch<LanguageController>()
-        .currentLocale
-        .languageCode;
+    final langCode = Localizations.localeOf(context).languageCode;
     final fontSizeGreeting = langCode == 'si' ? 22.0 : langCode == 'ta' ? 22.0 : 24.0;
     final fontSizeContent = langCode == 'si' || langCode == 'ta' ? 15.0 : 16.0;
     return Center(
@@ -72,6 +69,7 @@ class LanguageSelectorWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              
               CommonButtonWidget(
                 text: AppLocalizations.of(context)!.langEnglish,
                 onPressed: () {
@@ -82,6 +80,7 @@ class LanguageSelectorWidget extends StatelessWidget {
                 textStyle: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'NotoSans',
                 ),
               ),
 
