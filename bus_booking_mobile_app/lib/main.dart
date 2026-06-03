@@ -10,6 +10,7 @@ import 'core/auth/auth_repository.dart';
 import 'core/auth/auth_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'features/main/main_screen_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +31,7 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) => AuthProvider(AuthRepository(AuthData())),
         ),
+        ChangeNotifierProvider(create: (_) => NavigationProvider()),
       ],
       child: const MyApp(),
     ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'splash_repository.dart';
 import 'splash_data.dart';
-
+import '../auth/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,13 +24,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> appStartUp() async {
+    final authProvider = context.read<AuthProvider>();
     final seenIntro = await repository.hasSeenIntro();
-    final session = await repository.getSession();
+    await authProvider.syncSessionProvider();
+
+    if(!mounted) return;  
 
     if (!seenIntro) {
       Navigator.pushReplacementNamed(context, '/intro');
-    } else if (session != null) {
-      Navigator.pushReplacementNamed(context, '/home');
+    } else if (authProvider.user != null) {
+      Navigator.pushReplacementNamed(context, '/main');
     } else {
       Navigator.pushReplacementNamed(context, '/login');
     }

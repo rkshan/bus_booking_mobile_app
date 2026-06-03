@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'auth_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'auth_model.dart';
+import 'auth_model.dart';
 
 class AuthProvider extends ChangeNotifier {
 
@@ -13,6 +14,7 @@ class AuthProvider extends ChangeNotifier {
   bool isLoading = false;
   AuthModel? user;
   String? errorMessage;
+  
 
   void setEmail(String value) {
     email = value;
@@ -41,9 +43,14 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-   Future<void> logoutProvider() async {
+  Future<void> logoutProvider() async {
     await authRepository.logoutRepo();
     user = null;
+    notifyListeners();
+  }
+
+  Future<void> syncSessionProvider() async {
+    user = authRepository.getCurrentUserRepo();
     notifyListeners();
   }
 }
