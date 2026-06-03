@@ -25,6 +25,20 @@ class AuthRepository {
   }
 
   Future<void> logoutRepo() async {
-    await Supabase.instance.client.auth.signOut();
+    await authData.logoutApiCall();
+  }
+
+  AuthModel? getCurrentUserRepo() {
+    final session = authData.getCurrentSessionApiCall();
+
+    if (session == null) return null;
+
+    final user = session.user;
+
+    return AuthModel(
+      userId: user.id,
+      email: user.email ?? '',
+      accessToken: session.accessToken,
+    );
   }
 }
