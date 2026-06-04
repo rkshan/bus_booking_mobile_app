@@ -14,9 +14,17 @@ class CommonButtonWidget extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    final defaultStyle = ElevatedButton.styleFrom(
+      minimumSize: const Size.fromHeight(56),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.0)),
+      backgroundColor: Theme.of(context).primaryColor,
+      elevation: 8,
+      shadowColor: Theme.of(context).primaryColor.withOpacity(0.4),
+    );
+
     return ElevatedButton(
       onPressed: onPressed,
-      style: buttonStyle,
+      style: buttonStyle ?? defaultStyle,
       child: Text(text, style: textStyle),
     );
   }
