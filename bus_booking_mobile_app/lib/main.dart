@@ -61,6 +61,20 @@ class MyApp extends StatelessWidget {
 
           initialRoute: '/',
           routes: AppRoutes.routes,
+
+          builder: (context, child) {
+            return Stack(
+              children: [
+                child!,
+
+                if (lang.isLoading)
+                  Container(
+                    color: Colors.black54,
+                    child: const Center(child: CircularProgressIndicator()),
+                  ),
+              ],
+            );
+          },
         );
       },
     );
