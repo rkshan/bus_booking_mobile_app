@@ -14,166 +14,157 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final langCode = Localizations.localeOf(context).languageCode;
-    final fontSizeGreeting = langCode == 'si'
-        ? 18.0
-        : langCode == 'ta'
-        ? 18.0
-        : 24.0;
-    final fontSizeContent = langCode == 'si' || langCode == 'ta' ? 16.0 : 16.0;
+    final fontSizeGreeting = langCode == 'si' || langCode == 'ta' ? 36.0 : 48.0;
+    final fontSizeContent = langCode == 'si' || langCode == 'ta' ? 14.0 : 16.0;
     final fontFamily = langCode == 'si'
         ? 'NotoSansSinhala'
         : langCode == 'ta'
-        ? 'NotoSansTamil'
-        : null;
+            ? 'NotoSansTamil'
+            : null;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.login_screen_welcome,
-          style: TextStyle(
-            fontSize: fontSizeGreeting,
-            fontWeight: FontWeight.bold,
-            fontFamily: fontFamily,
-          ),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-
-          children: [
-            Text(
-              AppLocalizations.of(context)!.login_screen_title,
-              style: TextStyle(
-                fontSize: fontSizeContent,
-                fontFamily: fontFamily,
+      backgroundColor: const Color(0xFFF8F8FB),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 24),
+              Text(
+                AppLocalizations.of(context)!.login_screen_welcome,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: fontSizeGreeting,
+                  fontWeight: FontWeight.w800,
+                  fontFamily: fontFamily,
+                ),
               ),
-            ),
 
-            Text(
-              AppLocalizations.of(context)!.login_screen_subtitle,
-              style: TextStyle(
-                fontSize: fontSizeContent,
-                fontFamily: fontFamily,
+              const SizedBox(height: 8),
+              Text(
+                AppLocalizations.of(context)!.login_screen_title,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, fontFamily: fontFamily),
               ),
-            ),
 
-            CommonTextInputWidget(
-              text: AppLocalizations.of(context)!.login_screen_email_hint,
-              label: AppLocalizations.of(context)!.login_screen_email_label,
-              onChanged: (value) {
-                context.read<AuthProvider>().setEmail(value);
-              },
-              textStyle: TextStyle(
-                fontSize: fontSizeContent,
-                fontFamily: fontFamily,
+              const SizedBox(height: 8),
+              Text(
+                AppLocalizations.of(context)!.login_screen_subtitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: fontSizeContent, color: Colors.grey[700], fontFamily: fontFamily),
               ),
-              status: false,
-            ),
 
-            CommonTextInputWidget(
-              text: AppLocalizations.of(context)!.login_screen_password_hint,
-              label: AppLocalizations.of(context)!.login_screen_password_label,
-              onChanged: (value) {
-                context.read<AuthProvider>().setPassword(value);
-              },
-              textStyle: TextStyle(
-                fontSize: fontSizeContent,
-                fontFamily: fontFamily,
+              const SizedBox(height: 28),
+
+              CommonTextInputWidget(
+                text: AppLocalizations.of(context)!.login_screen_email_hint,
+                label: AppLocalizations.of(context)!.login_screen_email_label,
+                onChanged: (value) {
+                  context.read<AuthProvider>().setEmail(value);
+                },
+                textStyle: TextStyle(fontSize: 14, fontFamily: fontFamily),
+                status: false,
+                prefixIcon: Icons.email_outlined,
+                keyboardType: TextInputType.emailAddress,
               ),
-              status: true,
-            ),
 
-            Text(
-              AppLocalizations.of(context)!.login_screen_forgot_password,
-              style: TextStyle(
-                fontSize: fontSizeContent,
-                fontFamily: fontFamily,
+              const SizedBox(height: 16),
+
+              CommonTextInputWidget(
+                text: AppLocalizations.of(context)!.login_screen_password_hint,
+                label: AppLocalizations.of(context)!.login_screen_password_label,
+                onChanged: (value) {
+                  context.read<AuthProvider>().setPassword(value);
+                },
+                textStyle: TextStyle(fontSize: 14, fontFamily: fontFamily),
+                status: true,
+                prefixIcon: Icons.lock_outline,
+                suffixWidget: Icon(Icons.visibility_outlined, color: Colors.grey[600]),
               ),
-            ),
 
-            Consumer<AuthProvider>(
-              builder: (context, auth, child) {
-                if (auth.user != null &&
-                    auth.user!.accessToken.isNotEmpty &&
-                    auth.user!.userId.isNotEmpty) {
-                  Future.microtask(() {
-                    Navigator.pushReplacementNamed(context, '/main');
-                  });
-                }
+              const SizedBox(height: 8),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  AppLocalizations.of(context)!.login_screen_forgot_password,
+                  style: TextStyle(fontSize: 14, color: Theme.of(context).primaryColor, fontFamily: fontFamily),
+                ),
+              ),
 
-                if (auth.errorMessage != null) {
-                  Future.microtask(() {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text(auth.errorMessage!)));
-                  });
-                }
+              const SizedBox(height: 18),
 
-                return CommonButtonWidget(
-                  text: auth.isLoading
-                      ? "Loading..."
-                      : AppLocalizations.of(context)!.login_screen_button,
+              Consumer<AuthProvider>(
+                builder: (context, auth, child) {
+                  if (auth.user != null &&
+                      auth.user!.accessToken.isNotEmpty &&
+                      auth.user!.userId.isNotEmpty) {
+                    Future.microtask(() {
+                      Navigator.pushReplacementNamed(context, '/main');
+                    });
+                  }
 
-                  onPressed: auth.isLoading
-                      ? null
-                      : () {
-                          context.read<AuthProvider>().loginProvider();
-                        },
+                  if (auth.errorMessage != null) {
+                    Future.microtask(() {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(auth.errorMessage!)));
+                    });
+                  }
 
-                  textStyle: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                  return CommonButtonWidget(
+                    text: auth.isLoading ? 'Loading...' : AppLocalizations.of(context)!.login_screen_button,
+                    onPressed: auth.isLoading ? null : () => context.read<AuthProvider>().loginProvider(),
+                    textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                    buttonStyle: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0A66FF)),
+                  );
+                },
+              ),
+
+              const SizedBox(height: 12),
+              TextButton(
+                onPressed: () async {
+                  final splashRepo = SplashRepository(SplashData());
+                  await splashRepo.setSeenIntro(false);
+                },
+                child: const Text('setting up intro screen', style: TextStyle(color: Color(0xFF0A66FF))),
+              ),
+
+              const SizedBox(height: 20),
+              Row(children: const [Expanded(child: Divider()), SizedBox(width: 8), Text('Or continue with'), SizedBox(width: 8), Expanded(child: Divider())]),
+              const SizedBox(height: 16),
+
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: Colors.grey.shade300),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    backgroundColor: Colors.white,
                   ),
-                );
-              },
-            ),
-
-            CommonButtonWidget(
-              text: "setting up intro screen",
-
-              onPressed: () async {
-                final splashRepo = SplashRepository(SplashData());
-                await splashRepo.setSeenIntro(false);
-              },
-
-              textStyle: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [Icon(Icons.g_translate, color: Colors.red), SizedBox(width: 8), Text('Google', style: TextStyle(color: Colors.black))],
+                  ),
+                ),
               ),
-            ),
 
-            Text(
-              AppLocalizations.of(context)!.login_screen_no_account,
-              style: TextStyle(
-                fontSize: fontSizeContent,
-                fontFamily: fontFamily,
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(AppLocalizations.of(context)!.login_screen_no_account, style: TextStyle(color: Colors.grey[700], fontFamily: fontFamily)),
+                  const SizedBox(width: 6),
+                  Text(AppLocalizations.of(context)!.login_screen_register_now, style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontFamily: fontFamily)),
+                ],
               ),
-            ),
 
-            Text(
-              AppLocalizations.of(context)!.login_screen_register_now,
-              style: TextStyle(
-                fontSize: fontSizeContent,
-                fontFamily: fontFamily,
-              ),
-            ),
-
-            Text(
-              AppLocalizations.of(context)!.login_screen_or_continue,
-              style: TextStyle(
-                fontSize: fontSizeContent,
-                fontFamily: fontFamily,
-              ),
-            ),
-
-            Text(
-              AppLocalizations.of(context)!.login_screen_google_login,
-              style: TextStyle(
-                fontSize: fontSizeContent,
-                fontFamily: fontFamily,
-              ),
-            ),
-          ],
+              const SizedBox(height: 24),
+            ],
+          ),
         ),
       ),
     );
