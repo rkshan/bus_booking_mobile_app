@@ -116,7 +116,7 @@ class AppLocalizationsSi extends AppLocalizations {
   String get login_screen_or_continue => 'හෝ';
 
   @override
-  String get login_screen_google_login => 'Google සමඟ ඉදිරියට යන්න';
+  String get login_screen_google_login => 'Google භාවිතයෙන් ඉදිරියට යන්න';
 
   @override
   String get main_screen_menu_home => 'සොයන්න';

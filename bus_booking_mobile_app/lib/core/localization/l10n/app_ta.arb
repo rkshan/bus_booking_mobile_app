@@ -37,8 +37,8 @@
   "login_screen_button": "உள்நுழை",
   "login_screen_no_account": "கணக்கு இல்லையா?",
   "login_screen_register_now": "இப்போது பதிவு செய்யுங்கள்",
-  "login_screen_or_continue": "அல்லது தொடருங்கள்",
-  "login_screen_google_login": "Google மூலம் தொடருங்கள்",
+  "login_screen_or_continue": "அல்லது",
+  "login_screen_google_login": "Google மூலம் தொடரவும்",
 
   "main_screen_menu_home": "தேடு",
   "main_screen_menu_my_tickets": "டிக்கெட்டுகள்",

@@ -131,7 +131,7 @@ class LoginScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: 20),
-              Row(children: const [Expanded(child: Divider()), SizedBox(width: 8), Text('Or continue with'), SizedBox(width: 8), Expanded(child: Divider())]),
+              Row(children: [Expanded(child: Divider()), SizedBox(width: 8), Text(AppLocalizations.of(context)!.login_screen_or_continue), SizedBox(width: 8), Expanded(child: Divider())]),
               const SizedBox(height: 16),
 
               SizedBox(
@@ -147,18 +147,38 @@ class LoginScreen extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [Icon(Icons.g_translate, color: Colors.red), SizedBox(width: 8), Text('Google', style: TextStyle(color: Colors.black))],
+                    children: [
+                      Icon(Icons.g_translate, color: Colors.red),
+                      SizedBox(width: 8),
+                      Text(
+                        AppLocalizations.of(context)!.login_screen_google_login,
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
               ),
 
               const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
+                alignment: WrapAlignment.center,
                 children: [
-                  Text(AppLocalizations.of(context)!.login_screen_no_account, style: TextStyle(color: Colors.grey[700], fontFamily: fontFamily)),
+                  Text(
+                    AppLocalizations.of(context)!.login_screen_no_account,
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontFamily: fontFamily,
+                    ),
+                  ),
                   const SizedBox(width: 6),
-                  Text(AppLocalizations.of(context)!.login_screen_register_now, style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontFamily: fontFamily)),
+                  Text(
+                    AppLocalizations.of(context)!.login_screen_register_now,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: fontFamily,
+                    ),
+                  ),
                 ],
               ),
 

@@ -307,13 +307,13 @@ abstract class AppLocalizations {
   /// No description provided for @login_screen_or_continue.
   ///
   /// In en, this message translates to:
-  /// **'Or continue with'**
+  /// **'Or'**
   String get login_screen_or_continue;
 
   /// No description provided for @login_screen_google_login.
   ///
   /// In en, this message translates to:
-  /// **'Google'**
+  /// **'Continue with Google'**
   String get login_screen_google_login;
 
   /// No description provided for @main_screen_menu_home.
