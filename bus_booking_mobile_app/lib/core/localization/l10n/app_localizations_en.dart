@@ -113,10 +113,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_screen_register_now => 'Register Now';
 
   @override
-  String get login_screen_or_continue => 'Or continue with';
+  String get login_screen_or_continue => 'Or';
 
   @override
-  String get login_screen_google_login => 'Google';
+  String get login_screen_google_login => 'Continue with Google';
 
   @override
   String get main_screen_menu_home => 'Explore';
