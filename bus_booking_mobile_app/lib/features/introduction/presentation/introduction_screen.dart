@@ -25,12 +25,18 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         .languageCode;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        scrolledUnderElevation: 0,
         title: Text(
           AppLocalizations.of(context)!.intro,
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: const Color(0xFF7E8B97),
             fontFamily: langCode == 'si'
                 ? 'NotoSansSinhala'
                 : langCode == 'ta'
@@ -79,8 +85,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   height: 8,
                   decoration: BoxDecoration(
                     color: currentPage == index
-                        ? Colors.blue
-                        : Colors.grey,
+                        ? const Color(0xFF0A66FF)
+                        : const Color(0xFFE5E7EB),
                     borderRadius: BorderRadius.circular(10),
                   ),
                 );
