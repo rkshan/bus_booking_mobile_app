@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../../../core/localization/language_controller.dart';
 import '../../../../core/localization/l10n/app_localizations.dart';
-import 'common_button_widget.dart';
 
 class Intro2Page extends StatelessWidget {
   const Intro2Page({super.key});
@@ -10,59 +7,122 @@ class Intro2Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final langCode = Localizations.localeOf(context).languageCode;
-    final fontSizeGreeting = langCode == 'si' ? 22.0 : langCode == 'ta' ? 22.0 : 24.0;
-    final fontSizeContent = langCode == 'si' || langCode == 'ta' ? 15.0 : 16.0;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+    String? fontFamily = langCode == 'si'
+        ? 'NotoSansSinhala'
+        : langCode == 'ta'
+            ? 'NotoSansTamil'
+            : null;
 
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Headline
+              Text(
+                AppLocalizations.of(context)!.page2_welcome,
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  color: const Color(0xFF111827),
+                  fontFamily: fontFamily,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+
+              // Sub-headline
+              Text(
+                AppLocalizations.of(context)!.page2_title,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF0A66FF),
+                  fontFamily: fontFamily,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 32),
+
+              // Features
+              _buildFeatureCard(
+                context,
+                icon: Icons.confirmation_number_outlined,
+                text: AppLocalizations.of(context)!.page2_feature1,
+                fontFamily: fontFamily,
+              ),
+              const SizedBox(height: 16),
+              _buildFeatureCard(
+                context,
+                icon: Icons.event_seat_outlined,
+                text: AppLocalizations.of(context)!.page2_feature2,
+                fontFamily: fontFamily,
+              ),
+              const SizedBox(height: 16),
+              _buildFeatureCard(
+                context,
+                icon: Icons.payment_outlined,
+                text: AppLocalizations.of(context)!.page2_feature3,
+                fontFamily: fontFamily,
+              ),
+              const SizedBox(height: 16),
+              _buildFeatureCard(
+                context,
+                icon: Icons.bolt_outlined,
+                text: AppLocalizations.of(context)!.page2_feature4,
+                fontFamily: fontFamily,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFeatureCard(
+    BuildContext context, {
+    required IconData icon,
+    required String text,
+    String? fontFamily,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: const Color(0xFFE5E7EB),
+          width: 1.0,
+        ),
+      ),
+      child: Row(
         children: [
-          Text(
-            AppLocalizations.of(context)!.page2_welcome,
-            style: TextStyle(
-              fontSize: fontSizeGreeting,
-              fontWeight: FontWeight.bold,
+          Container(
+            width: 48,
+            height: 48,
+            decoration: const BoxDecoration(
+              color: Color(0xFFEFF6FF),
+              shape: BoxShape.circle,
             ),
-            textAlign: TextAlign.center
-          ),
-
-          Text(
-            AppLocalizations.of(context)!.page2_title,
-            style: TextStyle(
-              fontSize: fontSizeContent,
-              fontWeight: FontWeight.w600,
+            child: Icon(
+              icon,
+              color: const Color(0xFF0A66FF),
+              size: 24,
             ),
           ),
-
-          Text(
-            AppLocalizations.of(context)!.page2_feature1,
-            style: TextStyle(
-              fontSize: fontSizeContent,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-
-          Text(
-            AppLocalizations.of(context)!.page2_feature2,
-            style: TextStyle(
-              fontSize: fontSizeContent,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-
-          Text(
-            AppLocalizations.of(context)!.page2_feature3,
-            style: TextStyle(
-              fontSize: fontSizeContent,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-
-          Text(
-            AppLocalizations.of(context)!.page2_feature4,
-            style: TextStyle(
-              fontSize: fontSizeContent,
-              fontWeight: FontWeight.w600,
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF1F2937),
+                fontFamily: fontFamily,
+              ),
             ),
           ),
         ],

@@ -25,24 +25,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> appStartUp() async {
     final authProvider = context.read<AuthProvider>();
-    final seenIntro = await repository.hasSeenIntro();
     await authProvider.syncSessionProvider();
 
-    if(!mounted) return;  
+    if (!mounted) return;
 
-    if (!seenIntro) {
-      Navigator.pushReplacementNamed(context, '/intro');
-    } else if (authProvider.user != null) {
-      Navigator.pushReplacementNamed(context, '/main');
-    } else {
-      Navigator.pushReplacementNamed(context, '/login');
-    }
+    Navigator.pushReplacementNamed(context, '/intro');
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
-    );
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }
