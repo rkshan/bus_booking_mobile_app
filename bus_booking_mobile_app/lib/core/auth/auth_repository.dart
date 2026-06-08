@@ -1,7 +1,5 @@
 import 'auth_data.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'auth_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
 

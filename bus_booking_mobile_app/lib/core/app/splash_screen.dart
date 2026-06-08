@@ -24,12 +24,15 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> appStartUp() async {
-    final authProvider = context.read<AuthProvider>();
-    await authProvider.syncSessionProvider();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!mounted) return;
+      final authProvider = context.read<AuthProvider>();
+      await authProvider.syncSessionProvider();
 
-    if (!mounted) return;
+      if (!mounted) return;
 
-    Navigator.pushReplacementNamed(context, '/intro');
+      Navigator.pushReplacementNamed(context, '/intro');
+    });
   }
 
   @override
