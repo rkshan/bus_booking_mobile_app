@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'core/localization/language_controller.dart';
 import 'routes/app_routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import "../../../core/localization/l10n/app_localizations.dart";
+import "core/localization/l10n/app_localizations.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'core/auth/auth_data.dart';
 import 'core/auth/auth_repository.dart';
