@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'auth_repository.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'auth_model.dart';
 import 'auth_model.dart';
 
 class AuthProvider extends ChangeNotifier {
