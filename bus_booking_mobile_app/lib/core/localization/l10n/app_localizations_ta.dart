@@ -114,10 +114,10 @@ class AppLocalizationsTa extends AppLocalizations {
   String get login_screen_register_now => 'இப்போது பதிவு செய்யுங்கள்';
 
   @override
-  String get login_screen_or_continue => 'அல்லது தொடருங்கள்';
+  String get login_screen_or_continue => 'அல்லது';
 
   @override
-  String get login_screen_google_login => 'Google மூலம் தொடருங்கள்';
+  String get login_screen_google_login => 'Google மூலம் தொடரவும்';
 
   @override
   String get main_screen_menu_home => 'தேடு';
