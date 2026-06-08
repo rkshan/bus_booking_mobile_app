@@ -19,7 +19,7 @@ class CommonButtonWidget extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.0)),
       backgroundColor: Theme.of(context).primaryColor,
       elevation: 8,
-      shadowColor: Theme.of(context).primaryColor.withOpacity(0.4),
+      shadowColor: Theme.of(context).primaryColor.withAlpha(102),
     );
 
     return ElevatedButton(
