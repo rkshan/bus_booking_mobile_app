@@ -21,7 +21,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
     final authProvider = Provider.of<AuthProvider>(context);
+
+    // attach only if changed
     if (_authProvider != authProvider) {
       _authProvider?.removeListener(_onAuthChanged);
       _authProvider = authProvider;
@@ -37,9 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _onAuthChanged() {
     if (!mounted) return;
+
     final auth = _authProvider;
     if (auth == null) return;
 
+    // success login (email + google)
     if (auth.user != null &&
         auth.user!.accessToken.isNotEmpty &&
         auth.user!.userId.isNotEmpty) {
@@ -50,16 +55,20 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     }
 
+    // error handling
     if (auth.errorMessage != null) {
       final msg = auth.errorMessage!;
-      auth.errorMessage = null; // Clear so it doesn't show again on rebuilds
+      auth.errorMessage = null;
+
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(msg),
               behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           );
         }
@@ -69,12 +78,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = context.watch<AuthProvider>();
     final langCode = Localizations.localeOf(context).languageCode;
     final fontSizeGreeting = langCode == 'si' || langCode == 'ta' ? 28.0 : 34.0;
-    final fontFamily = langCode == 'si'
-        ? 'NotoSansSinhala'
-        : langCode == 'ta'
+    final fontFamily =
+        langCode == 'si'
+            ? 'NotoSansSinhala'
+            : langCode == 'ta'
             ? 'NotoSansTamil'
             : null;
 
@@ -87,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 32),
-              
+
               // "Welcome Back" Header
               Text(
                 AppLocalizations.of(context)!.login_screen_welcome,
@@ -101,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               const SizedBox(height: 12),
-              
+
               // "Login to Your Account" Subtitle
               Text(
                 AppLocalizations.of(context)!.login_screen_title,
@@ -115,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               const SizedBox(height: 6),
-              
+
               // Lighter gray description
               Text(
                 AppLocalizations.of(context)!.login_screen_subtitle,
@@ -132,7 +141,8 @@ class _LoginScreenState extends State<LoginScreen> {
               // Email Field
               CommonTextInputWidget(
                 text: AppLocalizations.of(context)!.login_screen_email_hint,
-                label: '', // Empty to hide floating label and use placeholder style like screenshot
+                label:
+                    '', // Empty to hide floating label and use placeholder style like screenshot
                 onChanged: (value) {
                   context.read<AuthProvider>().setEmail(value);
                 },
@@ -146,7 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
               // Password Field
               CommonTextInputWidget(
                 text: AppLocalizations.of(context)!.login_screen_password_hint,
-                label: '', // Empty to hide floating label and use placeholder style like screenshot
+                label:
+                    '', // Empty to hide floating label and use placeholder style like screenshot
                 onChanged: (value) {
                   context.read<AuthProvider>().setPassword(value);
                 },
@@ -171,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               const SizedBox(height: 12),
-              
+
               // Forgot Password link
               Align(
                 alignment: Alignment.centerRight,
@@ -194,30 +205,41 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 24),
 
               // Login Button
-              CommonButtonWidget(
-                text: auth.isLoading ? 'Loading...' : AppLocalizations.of(context)!.login_screen_button,
-                onPressed: auth.isLoading
-                    ? null
-                    : () => context.read<AuthProvider>().loginProvider(),
-                textStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-                buttonStyle: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF0A66FF),
-                  disabledBackgroundColor: const Color(0xFF0A66FF).withAlpha(150),
-                  minimumSize: const Size.fromHeight(56),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(28.0),
-                  ),
-                  elevation: 4,
-                  shadowColor: const Color(0xFF0A66FF).withAlpha(100),
-                ),
+              Consumer<AuthProvider>(
+                builder: (context, auth, child) {
+                  return CommonButtonWidget(
+                    text:
+                        auth.isLoading
+                            ? 'Loading...'
+                            : AppLocalizations.of(context)!.login_screen_button,
+                    onPressed:
+                        auth.isLoading
+                            ? null
+                            : () =>
+                                context.read<AuthProvider>().loginProvider(),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                    buttonStyle: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF0A66FF),
+                      disabledBackgroundColor: const Color(
+                        0xFF0A66FF,
+                      ).withAlpha(150),
+                      minimumSize: const Size.fromHeight(56),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(28.0),
+                      ),
+                      elevation: 4,
+                      shadowColor: const Color(0xFF0A66FF).withAlpha(100),
+                    ),
+                  );
+                },
               ),
 
               const SizedBox(height: 12),
-              
+
               // "setting up intro screen" button
               TextButton(
                 onPressed: () async {
@@ -235,11 +257,16 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               const SizedBox(height: 20),
-              
+
               // "Or continue with" Divider
               Row(
                 children: [
-                  Expanded(child: Divider(color: const Color(0xFFE2E8F0), thickness: 1)),
+                  Expanded(
+                    child: Divider(
+                      color: const Color(0xFFE2E8F0),
+                      thickness: 1,
+                    ),
+                  ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
@@ -251,10 +278,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  Expanded(child: Divider(color: const Color(0xFFE2E8F0), thickness: 1)),
+                  Expanded(
+                    child: Divider(
+                      color: const Color(0xFFE2E8F0),
+                      thickness: 1,
+                    ),
+                  ),
                 ],
               ),
-              
+
               const SizedBox(height: 20),
 
               // Google Button
@@ -262,7 +294,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.5),
+                    side: const BorderSide(
+                      color: Color(0xFFE2E8F0),
+                      width: 1.5,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(28),
                     ),
@@ -270,9 +305,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: Colors.white,
                     elevation: 0,
                   ),
-                  onPressed: () {
-                    // Google sign-in
-                  },
+                  onPressed:
+                      () => context.read<AuthProvider>().googleLoginProvider(),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -289,14 +323,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
 
               const SizedBox(height: 28),
-              
+
               // "Don't have an account? Register Now" Row
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
