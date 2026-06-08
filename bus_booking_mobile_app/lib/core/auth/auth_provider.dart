@@ -1,11 +1,33 @@
 import 'package:flutter/material.dart';
 import 'auth_repository.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'auth_model.dart';
 import 'auth_model.dart';
 
 class AuthProvider extends ChangeNotifier {
 
   final AuthRepository authRepository;
-  AuthProvider(this.authRepository);
+  AuthProvider(this.authRepository) {
+    _listenAuthChanges();
+  }
+
+  void _listenAuthChanges() {
+    Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+      final session = data.session;
+
+      if (session != null) {
+        user = AuthModel(
+          userId: session.user.id,
+          email: session.user.email ?? '',
+          accessToken: session.accessToken,
+        );
+      } else {
+        user = null;
+      }
+
+      notifyListeners();
+    });
+  }
 
   String email = '';
   String password = '';
@@ -32,6 +54,22 @@ class AuthProvider extends ChangeNotifier {
 
     try {
       user = await authRepository.loginRepo(email, password);
+    } catch (e) {
+      errorMessage = e.toString();
+      user = null;
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> googleLoginProvider() async {
+    isLoading = true;
+    errorMessage = null;
+    notifyListeners();
+
+    try {
+      await authRepository.googleLoginRepo();
     } catch (e) {
       errorMessage = e.toString();
       user = null;
