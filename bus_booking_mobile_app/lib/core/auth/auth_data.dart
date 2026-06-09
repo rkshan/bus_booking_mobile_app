@@ -11,6 +11,13 @@ class AuthData {
     return response;
   }
 
+  Future<void> googleLoginApiCall() async {
+    await Supabase.instance.client.auth.signInWithOAuth(
+      OAuthProvider.google,
+      redirectTo: 'io.supabase.flutter://login-callback',
+    );
+  }
+
   Future<void> logoutApiCall() async {
     await supabase.auth.signOut();
   }

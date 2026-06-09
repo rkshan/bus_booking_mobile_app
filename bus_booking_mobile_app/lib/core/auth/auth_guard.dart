@@ -12,7 +12,15 @@ class AuthGuard extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
 
-    if (auth.user == null) {
+    if (auth.isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    if (auth.user == null ||
+        auth.user!.accessToken.isEmpty ||
+        auth.user!.userId.isEmpty) {
       return const LoginScreen();
     }
 
